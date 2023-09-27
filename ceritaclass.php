@@ -64,9 +64,9 @@ class Cerita{
         
         $startLimit = ($currentPage - 1) * $perpage;
 
-        $sql = "SELECT c.judul, u.nama, c.idcerita from cerita as c INNER JOIN users as u on c.idusers_pembuat_awal = u.idusers where c.judul=? limit ?,?";
+        $sql = "SELECT c.judul, u.nama, c.idcerita from cerita as c INNER JOIN users as u on c.idusers_pembuat_awal = u.idusers where c.judul like ? limit ?,?";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param('sii', $keyword, $startLimit, $perPage);
+        $stmt->bind_param('sii', $keyword, $startLimit, $perpage);
         $stmt->execute();
         $result = $stmt->get_result();
         $ceritaArr = [];
