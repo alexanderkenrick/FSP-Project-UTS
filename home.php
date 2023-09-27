@@ -9,7 +9,6 @@ if(!isset($_SESSION['id'])){
     header('location: home.php');
 }else{
     $id = $_SESSION['id'];
-    echo $id;
 }
 ?>
 
@@ -36,7 +35,7 @@ if(!isset($_SESSION['id'])){
         <input type="submit" value="Cari">
     </form>
     
-    <button onclick="window.location.href='tambah.php'">Buat Cerita Baru</button> <br>
+    <button onclick="window.location.href='tambah.php'">Buat Cerita Baru</button> <br> <br>
 
     <table border="1" width="100%">
         <tr>
@@ -71,6 +70,7 @@ if(!isset($_SESSION['id'])){
         $ceritaArr = $cerita->DaftarCerita($keyword, $currentPage, $perpage);
 
         $total = count($ceritaArr);
+
         for($i = 0; $i<$total;$i++){
             $ceritaTemp = $ceritaArr[$i];
             echo "<tr>";

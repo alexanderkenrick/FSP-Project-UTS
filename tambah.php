@@ -9,7 +9,6 @@ if(!isset($_SESSION['id'])){
     header('location: home.php');
 }else{
     $idUser = $_SESSION['id'];
-    echo $idUser;
 }
 ?>
 
