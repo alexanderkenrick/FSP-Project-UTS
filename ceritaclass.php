@@ -6,14 +6,80 @@ if (session_status() === PHP_SESSION_NONE) {
 
 class Cerita{
 
-    private $id;
+    private $idCerita;
     private $judul;
+    private $pembuat;
 
     public function __construct()
     {
-        $this->id = null;
+        $this->idCerita = null;
         $this->judul = null;
+        $this->pembuat = null;
     }
+
+    public function setIdCerita($idCerita)
+    {
+        $this->idCerita = $idCerita;
+    }
+
+    public function getIdCerita()
+    {
+        return $this->idCerita;
+    } 
+
+    public function setJudul($judul)
+    {
+        $this->judul = $judul;
+    } 
+
+    public function getJudul()
+    {
+        return $this->judul;
+    }
+    
+    public function setPembuat($pembuat)
+    {
+        $this->pembuat = $pembuat;
+    }
+
+    public function getPembuat()
+    {
+        return $this->pembuat;
+    }
+
+    public function TotalData($keyword){
+        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+
+        $stmt = $con->prepare("SELECT * from cerita where judul like ?");
+        $stmt->bind_param('s', $keyword);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $totalData = $result->num_rows;
+
+        return $totalData;
+    }
+    
+    public function DaftarCerita($keyword, $currentPage, $perpage){
+        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+        
+        $startLimit = ($currentPage - 1) * $perpage;
+
+        $sql = "SELECT c.judul, u.nama, c.idcerita from cerita as c INNER JOIN users as u on c.idusers_pembuat_awal = u.idusers where c.judul=? limit ?,?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param('sii', $keyword, $startLimit, $perPage);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $ceritaArr = [];
+        while($row = $result->fetch_assoc()){
+            $cerita =  new Cerita();
+            $cerita->setIdCerita($row['idcerita']);
+            $cerita->setJudul($row['judul']);
+            $cerita->setPembuat($row['nama']);
+            $ceritaArr[] = $cerita;
+        }
+        return $ceritaArr;
+    }
+    
 
     public function TambahCerita($idUser, $judul, $paragraf){
         $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
