@@ -108,6 +108,22 @@ class Cerita{
         }
     }
 
+    public function TambahParagraf($idUser, $idCerita, $paragraf){
+        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+
+        $sql = "INSERT into paragraf values(?,?,?, now())";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("sis", $idUser, $idCerita, $paragraf);
+        $stmt->execute();
+
+        $con->close();
+        if($stmt->error){
+            return "Anda telah menambahkan paragraf sebelumnya";
+        }else{
+            return "Berhasil menambahkan paragraf";
+        }
+    }
+
     public function __destruct()
     {
         

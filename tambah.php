@@ -6,9 +6,10 @@ require_once('userclass.php');
 require_once('ceritaclass.php'); 
 
 if(!isset($_SESSION['id'])){
-    header('location: home.php');
+    header('location: index.php');
 }else{
     $idUser = $_SESSION['id'];
+    $idCerita = $_GET['cerita'];
 }
 ?>
 
