@@ -81,12 +81,12 @@
                             unset($_SESSION['flash_message']);
                         }
                     ?>
-                    <label for="snrp">sNRP: </label>
-                    <input type="text" name="snrp"> <br>
+                    <label for="nrp">NRP: </label>
+                    <input type="text" name="nrp"> <br>
                     <label for="password">Password: </label>
                     <input type="password" name="password" id=""> <br>
                     <input type="submit" value="Login" name="submit"> <br>
-                    
+                    <a href="daftar.php">Daftar akun</a>
                 </form>
                 
             </div>
@@ -96,11 +96,11 @@
     
 <?php
     if(isset($_POST['submit'])){
-        $snrp = htmlentities(strip_tags($_POST['snrp'])); 
+        $nrp = htmlentities(strip_tags(addslashes($_POST['nrp']))); 
         $password = $_POST['password'];
         
         $user = new User();
-        $status = $user->Login($snrp, $password);
+        $status = $user->Login($nrp, $password);
         if($status == false){
             header("location: index.php");
         }else{

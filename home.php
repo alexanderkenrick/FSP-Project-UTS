@@ -5,6 +5,10 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once('userclass.php'); 
 require_once('ceritaclass.php');
 
+if(isset($_POST['logout'])){
+    unset($_SESSION['id']);
+}
+
 if(!isset($_SESSION['id'])){
     header('location: index.php');
 }else{
@@ -17,7 +21,7 @@ if(!isset($_SESSION['id'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cerita Bersambung</title>
     <style>
         li{
             list-style-type: none;
@@ -29,7 +33,7 @@ if(!isset($_SESSION['id'])){
     </style>
 </head>
 <body>
-    <form action="home.php" method="get">
+    <form action="home.php" method="GET" style="margin-bottom: 20px;">
         <label for="">Cari Judul: </label>
         <input type="text" name="keyword">
         <input type="submit" value="Cari">
@@ -37,11 +41,11 @@ if(!isset($_SESSION['id'])){
     
     <button onclick="window.location.href='tambah.php'">Buat Cerita Baru</button> <br> <br>
 
-    <table border="1" width="100%">
+    <table border="1" width="50%">
         <tr>
             <th>Judul</th>
             <th>Pembuat Awal</th>
-            <th>Aksi</th>
+            <th width="100px">Aksi</th>
         </tr>
     <?php
         // SELECT c.judul, u.nama, c.idcerita from cerita as c INNER JOIN users as u on c.idusers_pembuat_awal = u.idusers;
@@ -57,6 +61,9 @@ if(!isset($_SESSION['id'])){
 
         // Mendapatkan posisi halaman sekarang
         if(isset($_GET['page'])){
+            if(!is_numeric($_GET['page'])){
+                $currentPage = 1;
+            }
             $currentPage = $_GET['page'];
         }else{
             $currentPage = 1;
@@ -74,8 +81,8 @@ if(!isset($_SESSION['id'])){
         for($i = 0; $i<$total;$i++){
             $ceritaTemp = $ceritaArr[$i];
             echo "<tr>";
-            echo "<td>".$ceritaTemp->getJudul()."</td>";
-            echo "<td>".$ceritaTemp->getPembuat()."</td>";
+            echo "<td>".stripslashes($ceritaTemp->getJudul())."</td>";
+            echo "<td>".stripslashes($ceritaTemp->getPembuat())."</td>";
             echo "<td><a href='lihat.php?cerita=". $ceritaTemp->getIdCerita()."'>Lihat Cerita</a></td>";
             echo "</tr>";
         }
@@ -89,10 +96,18 @@ if(!isset($_SESSION['id'])){
         }
         echo "<ul>";
         for($page=1;$page<=$totalPage;$page++){
-            echo "<li> <a href='home.php?page=$page&keyword=$key'> $page </a></li>";
+            if($key!=''){
+                echo "<li> <a href='home.php?page=$page&keyword=$key'> $page </a></li>";
+            }else{
+                echo "<li> <a href='home.php?page=$page'> $page </a></li>";
+            }
+            
         }
         echo "</ul>";
     ?> 
+    <form action="" method="POST">
+        <input type="submit" value="Log Out" name="logout">
+    </form>
 
 </body>
 </html>

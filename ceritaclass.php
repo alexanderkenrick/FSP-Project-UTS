@@ -82,6 +82,7 @@ class Cerita{
     
 
     public function TambahCerita($idUser, $judul, $paragraf){
+        
         $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
 
         $sql = "INSERT into cerita values(null, ?,?)";
@@ -91,7 +92,7 @@ class Cerita{
 
         $idCerita = $stmt->insert_id; //Mendapatkan id dari judul cerita yang baru ditambahkan
 
-        $sql2 = "INSERT into paragraf values(?,?,?, now())";
+        $sql2 = "INSERT into paragraf values(null,?,?,?, now())";
         $stmt2 = $con->prepare($sql2);
         $stmt2->bind_param("sis", $idUser, $idCerita, $paragraf);
         $stmt2->execute();
@@ -111,7 +112,7 @@ class Cerita{
     public function TambahParagraf($idUser, $idCerita, $paragraf){
         $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
 
-        $sql = "INSERT into paragraf values(?,?,?, now())";
+        $sql = "INSERT into paragraf values(null,?,?,?, now())";
         $stmt = $con->prepare($sql);
         $stmt->bind_param("sis", $idUser, $idCerita, $paragraf);
         $stmt->execute();

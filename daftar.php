@@ -3,6 +3,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once('userclass.php'); 
+
+if(isset($_SESSION['id'])){
+    header('location: home.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,25 +17,26 @@ require_once('userclass.php');
 </head>
 <body>
     <form action="" method="POST">
-        <label for="snrp">snrp:</label>
-        <input type="text" name="snrp"><br>
+        <label for="snrp">nrp:</label>
+        <input type="text" name="nrp" required><br>
         <label for="password">Password: </label>
-        <input type="password" name="password" id=""> <br>
+        <input type="password" name="password" id="" required> <br>
         <label for="nama">Nama: </label>
-        <input type="text" name="nama" id=""> <br>
+        <input type="text" name="nama" id="" required> <br>
 
         <input type="submit" value="Daftar" name="submit">
     </form>
+    <a href="index.php">Log In</a>
     <?php
        
        if(isset($_POST['submit'])){
 
-        $snrp = htmlentities(strip_tags($_POST['snrp'])); 
+        $nrp = htmlentities(strip_tags(addslashes($_POST['nrp']))); 
         $password = $_POST['password'];
-        $nama = $_POST['nama'];
+        $nama = addslashes($_POST['nama']);
     
         $user = new User();
-        $msg = $user->Daftar($snrp, $nama, $password);
+        $msg = $user->Daftar($nrp, $nama, $password);
         echo $msg;
     }
     

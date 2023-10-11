@@ -24,7 +24,7 @@
     $result = $stmt->get_result();
 
     $row = $result->fetch_assoc();
-    $judul = $row['judul'];
+    $judul = stripslashes($row['judul']);
 
     $sql2 = "SELECT isi_paragraf from paragraf where idcerita = ?";
     $stmt2 = $con->prepare($sql2);
@@ -34,7 +34,7 @@
     $paragrafArr = [];
 
     while($row2 = $result2->fetch_assoc()){
-        $paragrafArr[] = $row2['isi_paragraf'];
+        $paragrafArr[] = stripslashes($row2['isi_paragraf']);
     }
     $con->close();
 ?>
@@ -44,22 +44,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?= $judul ?></title>
+    <style>
+    .paragraf{
+        padding-left: 20px;
+    }
+    textarea{
+        min-height: 50px;
+    }
+    </style>
 </head>
 <body>
     <h1><?= $judul?></h1>
 
-    <?php
-        $totalPar = count($paragrafArr);
-        for($i=0;$i<$totalPar;$i++){
-            echo "<p class='isi-paragraf'>". $paragrafArr[$i] ."</p>";
-        }
-
-    ?>
+    <div class="paragraf">
+        <?php
+            $totalPar = count($paragrafArr);
+            for($i=0;$i<$totalPar;$i++){
+                echo "<p class='isi-paragraf'>". $paragrafArr[$i] ."</p>";
+            }
+        ?>
+     </div>
     <br><br>
     Tambah Pragraf:
     <form action="" method="post">
-        <textarea name="tambah-paragraf" id="txtParagraf" placeholder="" ></textarea> <br>
+        <textarea name="tambah-paragraf" id="txtParagraf" placeholder="" maxlength="100" cols="50" required></textarea> <br>
         <input type="submit" value="Simpan" name="simpan">
 
     </form>
@@ -68,18 +77,25 @@
     
         if(isset($_SESSION['flash_message'])){
             $msg =  $_SESSION['flash_message'];
-            echo "<span class='error'>$msg</span>";
+            echo "<br><span class='error'>$msg</span><br>";
             unset($_SESSION['flash_message']);
         }
         
         if(isset($_POST['simpan'])){
-            $paragraf = $_POST['tambah-paragraf'];
+            $paragraf = addslashes($_POST['tambah-paragraf']);
 
-            $cerita = new Cerita();
-            $msg = $cerita->TambahParagraf($idUser, $idCerita, $paragraf);
+            if($paragraf== '' || $paragraf==' ' || $paragraf == '' || $paragraf== " "){
+                $_SESSION['flash_message'] = "Judul dan paragraf tidak boleh kosong";
+                header("location: lihat.php?cerita=".$idCerita);
+            }else{
+                $cerita = new Cerita();
+                $msg = $cerita->TambahParagraf($idUser, $idCerita, $paragraf);
+    
+                $_SESSION['flash_message'] = $msg;
+                header("location: lihat.php?cerita=".$idCerita);
+            }
 
-            $_SESSION['flash_message'] = $msg;
-            header("location: lihat.php?cerita=".$idCerita);
+          
         }
     ?>
     <a href="home.php"><< Kembali ke Halaman Awal</a>
