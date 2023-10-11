@@ -48,6 +48,7 @@ class Cerita{
     }
 
     protected static function ConnectionDb(){
+        // return new mysqli('localhost', 'id21385019_kenrick_wensel', 'Kenrick_Wensel_123', 'id21385019_fspcerbung');
         return new mysqli('localhost', 'root', '', 'fsp-cerita');
     }
 
@@ -123,7 +124,7 @@ class Cerita{
 
         $con->close();
         if($stmt->error){
-            return "Anda telah menambahkan paragraf sebelumnya";
+            return "Terjadi Error";
         }else{
             return "Berhasil menambahkan paragraf";
         }

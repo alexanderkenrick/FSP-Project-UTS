@@ -60,8 +60,6 @@ if(!isset($_SESSION['id'])){
                 $msg = $cerita->TambahCerita($idUser, $judul, $paragraf);
                 echo "<br>" . $msg;
             }
-
-           
         }
     ?>
 </body>

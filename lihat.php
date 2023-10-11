@@ -15,7 +15,8 @@
         $idCerita = $_GET['cerita'];
     }
 
-    $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+    // $con = new mysqli('localhost', 'id21385019_kenrick_wensel', 'Kenrick_Wensel_123', 'id21385019_fspcerbung');
+    $con =  new mysqli('localhost', 'root', '', 'fsp-cerita');
         
     $sql = "SELECT judul from cerita where idcerita = ?";
     $stmt = $con->prepare($sql);
@@ -67,8 +68,9 @@
      </div>
     <br><br>
     Tambah Pragraf:
-    <form action="" method="post">
+    <form action="prosesparagraf.php" method="POST">
         <textarea name="tambah-paragraf" id="txtParagraf" placeholder="" maxlength="100" cols="50" required></textarea> <br>
+        <input type="hidden" name="idcerita" value="<?= $idCerita ?>">
         <input type="submit" value="Simpan" name="simpan">
 
     </form>
@@ -81,22 +83,20 @@
             unset($_SESSION['flash_message']);
         }
         
-        if(isset($_POST['simpan'])){
-            $paragraf = addslashes($_POST['tambah-paragraf']);
+        // if(isset($_POST['simpan'])){
+        //     $paragraf = addslashes($_POST['tambah-paragraf']);
 
-            if($paragraf== '' || $paragraf==' ' || $paragraf == '' || $paragraf== " "){
-                $_SESSION['flash_message'] = "Judul dan paragraf tidak boleh kosong";
-                header("location: lihat.php?cerita=".$idCerita);
-            }else{
-                $cerita = new Cerita();
-                $msg = $cerita->TambahParagraf($idUser, $idCerita, $paragraf);
+        //     if($paragraf== '' || $paragraf==' ' || $paragraf == '' || $paragraf== " "){
+        //         $_SESSION['flash_message'] = "Judul dan paragraf tidak boleh kosong";
+        //         header("location: lihat.php?cerita=".$idCerita);
+        //     }else{
+        //         $cerita = new Cerita();
+        //         $msg = $cerita->TambahParagraf($idUser, $idCerita, $paragraf);
     
-                $_SESSION['flash_message'] = $msg;
-                header("location: lihat.php?cerita=".$idCerita);
-            }
-
-          
-        }
+        //         $_SESSION['flash_message'] = $msg;
+        //         header("location: lihat.php?cerita=".$idCerita);
+        //     }
+        // }
     ?>
     <a href="home.php"><< Kembali ke Halaman Awal</a>
 </body>

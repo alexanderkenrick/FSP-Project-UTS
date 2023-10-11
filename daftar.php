@@ -37,7 +37,7 @@ if(isset($_SESSION['id'])){
     
         $user = new User();
         $msg = $user->Daftar($nrp, $nama, $password);
-        echo $msg;
+        echo "<br>" . $msg;
     }
     
 ?>

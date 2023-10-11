@@ -16,10 +16,11 @@ class User{
     }
 
     protected static function ConnectionDb(){
+        // return new mysqli('localhost', 'id21385019_kenrick_wensel', 'Kenrick_Wensel_123', 'id21385019_fspcerbung');
         return new mysqli('localhost', 'root', '', 'fsp-cerita');
     }
 
-    public function Daftar($snrp, $nama, $password){
+    public function Daftar($nrp, $nama, $password){
         $con = $this::ConnectionDb();
 
         $salt = str_shuffle("ABCDEfghij");
@@ -29,7 +30,7 @@ class User{
 
         $sql = "INSERT into users values (?,?,?,?)";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("ssss", $snrp, $nama, $finalPassword, $salt);
+        $stmt->bind_param("ssss", $nrp, $nama, $finalPassword, $salt);
         $stmt->execute();
         $msg = "";
         if(!$stmt->error){
@@ -41,13 +42,13 @@ class User{
         return $msg;
     }
 
-    //$snrp adalah id yang dipassing dari input user
-    public function Login($snrp, $password){
+    //$nrp adalah id yang dipassing dari input user
+    public function Login($nrp, $password){
         $con = $this::ConnectionDb();
 
         $sql = "SELECT * from users where idusers=?";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param('s', $snrp);
+        $stmt->bind_param('s', $nrp);
         $stmt->execute();
 
         $status = false; //Status keberhasilan login
@@ -61,7 +62,7 @@ class User{
 
             if($finalpassword===$row['password']){
                 
-                $_SESSION['id'] = $snrp;
+                $_SESSION['id'] = $nrp;
                 $status = true;
                 return $status;
             }else{

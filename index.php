@@ -73,7 +73,7 @@
             </div>
             <div class="card-body">
             
-                <form action="" method="post">
+                <form action="proseslogin.php" method="post">
                      <?php
                         if(isset($_SESSION['flash_message'])){
                             $msg =  $_SESSION['flash_message'];
@@ -95,18 +95,22 @@
     </section>
     
 <?php
-    if(isset($_POST['submit'])){
-        $nrp = htmlentities(strip_tags(addslashes($_POST['nrp']))); 
-        $password = $_POST['password'];
+    // if(isset($_SESSION['id'])){
+    //     header('location: home.php');
+    // }
+    // if(isset($_POST['submit'])){
+    //     $nrp = htmlentities(strip_tags(addslashes($_POST['nrp']))); 
+    //     $password = $_POST['password'];
         
-        $user = new User();
-        $status = $user->Login($nrp, $password);
-        if($status == false){
-            header("location: index.php");
-        }else{
-            header("location: home.php");
-        }
-    }
+    //     $user = new User();
+    //     $status = $user->Login($nrp, $password);
+    //     if($status == false){
+    //         header("location: index.php");
+    //     }
+    //     // else{
+    //     //     header("location: home.php");
+    //     // }
+    // }
 
 ?>
 </body>
