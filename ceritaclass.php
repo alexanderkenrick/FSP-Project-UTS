@@ -47,8 +47,12 @@ class Cerita{
         return $this->pembuat;
     }
 
+    protected static function ConnectionDb(){
+        return new mysqli('localhost', 'root', '', 'fsp-cerita');
+    }
+
     public function TotalData($keyword){
-        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+        $con = $this::ConnectionDb();
 
         $stmt = $con->prepare("SELECT * from cerita where judul like ?");
         $stmt->bind_param('s', $keyword);
@@ -60,7 +64,7 @@ class Cerita{
     }
     
     public function DaftarCerita($keyword, $currentPage, $perpage){
-        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+        $con = $this::ConnectionDb();
         
         $startLimit = ($currentPage - 1) * $perpage;
 
@@ -83,7 +87,7 @@ class Cerita{
 
     public function TambahCerita($idUser, $judul, $paragraf){
         
-        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+        $con = $this::ConnectionDb();
 
         $sql = "INSERT into cerita values(null, ?,?)";
         $stmt = $con->prepare($sql);
@@ -110,7 +114,7 @@ class Cerita{
     }
 
     public function TambahParagraf($idUser, $idCerita, $paragraf){
-        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+        $con = $this::ConnectionDb();
 
         $sql = "INSERT into paragraf values(null,?,?,?, now())";
         $stmt = $con->prepare($sql);

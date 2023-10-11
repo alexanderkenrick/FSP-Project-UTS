@@ -15,9 +15,12 @@ class User{
         $this->nama = null;
     }
 
+    protected static function ConnectionDb(){
+        return new mysqli('localhost', 'root', '', 'fsp-cerita');
+    }
 
     public function Daftar($snrp, $nama, $password){
-        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+        $con = $this::ConnectionDb();
 
         $salt = str_shuffle("ABCDEfghij");
         $md5pass = md5($password);
@@ -40,7 +43,7 @@ class User{
 
     //$snrp adalah id yang dipassing dari input user
     public function Login($snrp, $password){
-        $con = new mysqli('localhost', 'root', '', 'fsp-cerita');
+        $con = $this::ConnectionDb();
 
         $sql = "SELECT * from users where idusers=?";
         $stmt = $con->prepare($sql);
