@@ -14,30 +14,9 @@
         $idUser = $_SESSION['id'];
         $idCerita = $_GET['cerita'];
     }
-
-    // $con = new mysqli('localhost', 'id21385019_kenrick_wensel', 'Kenrick_Wensel_123', 'id21385019_fspcerbung');
-    $con =  new mysqli('localhost', 'root', '', 'fsp-cerita');
-        
-    $sql = "SELECT judul from cerita where idcerita = ?";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param('i', $idCerita);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $row = $result->fetch_assoc();
-    $judul = stripslashes($row['judul']);
-
-    $sql2 = "SELECT isi_paragraf from paragraf where idcerita = ?";
-    $stmt2 = $con->prepare($sql2);
-    $stmt2->bind_param('i', $idCerita);
-    $stmt2->execute();
-    $result2 = $stmt2->get_result();
-    $paragrafArr = [];
-
-    while($row2 = $result2->fetch_assoc()){
-        $paragrafArr[] = stripslashes($row2['isi_paragraf']);
-    }
-    $con->close();
+    $cerita = new Cerita();
+    $judul = $cerita->TampilkanJudul($idCerita);
+    $paragrafArr = $cerita->LihatCerita($idCerita);
 ?>
 
 <!DOCTYPE html>
@@ -82,21 +61,7 @@
             echo "<br><span class='error'>$msg</span><br>";
             unset($_SESSION['flash_message']);
         }
-        
-        // if(isset($_POST['simpan'])){
-        //     $paragraf = addslashes($_POST['tambah-paragraf']);
 
-        //     if($paragraf== '' || $paragraf==' ' || $paragraf == '' || $paragraf== " "){
-        //         $_SESSION['flash_message'] = "Judul dan paragraf tidak boleh kosong";
-        //         header("location: lihat.php?cerita=".$idCerita);
-        //     }else{
-        //         $cerita = new Cerita();
-        //         $msg = $cerita->TambahParagraf($idUser, $idCerita, $paragraf);
-    
-        //         $_SESSION['flash_message'] = $msg;
-        //         header("location: lihat.php?cerita=".$idCerita);
-        //     }
-        // }
     ?>
     <a href="home.php"><< Kembali ke Halaman Awal</a>
 </body>

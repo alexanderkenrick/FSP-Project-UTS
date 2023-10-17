@@ -31,9 +31,9 @@ if(isset($_SESSION['id'])){
        
        if(isset($_POST['submit'])){
 
-        $nrp = htmlentities(strip_tags(addslashes($_POST['nrp']))); 
-        $password = $_POST['password'];
-        $nama = addslashes($_POST['nama']);
+        $nrp = strip_tags(addslashes($_POST['nrp'])); 
+        $password =  strip_tags(addslashes($_POST['password']));
+        $nama = strip_tags(addslashes($_POST['nama']));
     
         $user = new User();
         $msg = $user->Daftar($nrp, $nama, $password);

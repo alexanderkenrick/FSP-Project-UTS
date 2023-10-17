@@ -12,7 +12,7 @@ if(!isset($_SESSION['id'])){
 }
 
 if(isset($_POST['simpan'])){
-    $paragraf = addslashes($_POST['tambah-paragraf']);
+    $paragraf = htmlspecialchars(addslashes($_POST['tambah-paragraf']));
     $idCerita = $_POST['idcerita'];
 
     if($paragraf== '' || $paragraf==' ' || $paragraf == '' || $paragraf== " "){

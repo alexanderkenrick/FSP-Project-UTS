@@ -84,6 +84,34 @@ class Cerita{
         }
         return $ceritaArr;
     }
+    public function TampilkanJudul($idCerita) {
+        $con = $this::ConnectionDb();
+        $sql = "SELECT judul from cerita where idcerita = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param('i', $idCerita);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $row = $result->fetch_assoc();
+        $judul = stripslashes($row['judul']);
+        return $judul;
+    }
+
+    public function LihatCerita($idCerita){
+        $con = $this::ConnectionDb();
+    
+        $sql2 = "SELECT isi_paragraf from paragraf where idcerita = ?";
+        $stmt2 = $con->prepare($sql2);
+        $stmt2->bind_param('i', $idCerita);
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+        $paragrafArr = [];
+    
+        while($row2 = $result2->fetch_assoc()){
+            $paragrafArr[] = stripslashes($row2['isi_paragraf']);
+        }
+        return $paragrafArr;
+    }
     
 
     public function TambahCerita($idUser, $judul, $paragraf){

@@ -49,8 +49,8 @@ if(!isset($_SESSION['id'])){
     <a href="home.php"><< Kembali ke Halaman Awal</a>
     <?php
         if(isset($_POST['simpan'])){
-            $judul = strtoupper(addslashes($_POST['judul']));
-            $paragraf = $_POST['paragraf'];
+            $judul = strtoupper(htmlspecialchars(addslashes($_POST['judul'])));
+            $paragraf = htmlspecialchars(addslashes($_POST['paragraf']));
 
             if($judul== '' || $judul==' ' || $paragraf == '' || $paragraf== " "){
                 echo "<br> Judul dan paragraf tidak boleh kosong";
