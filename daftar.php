@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once('userclass.php'); 
+require_once('class/userclass.php'); 
 
 if(isset($_SESSION['id'])){
     header('location: home.php');

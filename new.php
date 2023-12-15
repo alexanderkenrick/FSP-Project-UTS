@@ -2,8 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once('userclass.php'); 
-require_once('ceritaclass.php'); 
+require_once('class/userclass.php'); 
+require_once('class/ceritaclass.php'); 
 
 if(!isset($_SESSION['id'])){
     header('location: index.php');
@@ -20,24 +20,16 @@ if(!isset($_SESSION['id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Cerita</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <style>
-    .content{
-        display: grid;
-        grid-template-columns: auto auto;
-        width: 400px;
-        gap: 12px;
-    }
-
-    .content textarea{
-        min-height: 60px;
-    }
+    
 </style>
 <body>
     
     <form action="tambah.php" method="post">
 
-        <div class="content">
+        <div class="content-new">
             <label for="judul">Judul:</label>
             <input type="text" name="judul" required>
             <label for="paragraf">Paragraf 1:</label>

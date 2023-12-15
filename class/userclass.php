@@ -3,7 +3,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+require_once('connection.php'); 
 class User{
 
     private $id;
@@ -15,13 +15,8 @@ class User{
         $this->nama = null;
     }
 
-    protected static function ConnectionDb(){
-        return new mysqli('localhost', 'id21385019_kenrick_wensel', 'Kenrick_Wensel_123', 'id21385019_fspcerbung');
-        // return new mysqli('localhost', 'root', '', 'fsp-cerita');
-    }
-
     public function Daftar($nrp, $nama, $password){
-        $con = $this::ConnectionDb();
+        $con = ConnectionDb::Connect();
 
         $salt = str_shuffle("ABCDEfghij");
         $md5pass = md5($password);
@@ -44,7 +39,7 @@ class User{
 
     //$nrp adalah id yang dipassing dari input user
     public function Login($nrp, $password){
-        $con = $this::ConnectionDb();
+        $con = ConnectionDb::Connect();
 
         $sql = "SELECT * from users where idusers=?";
         $stmt = $con->prepare($sql);

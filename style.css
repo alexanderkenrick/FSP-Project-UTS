@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+.none{
+    display: none;
+}
+/* Index */
+
+.content{
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+    width: 300px;
+    height: 350px;
+    background-color: yellow;
+}
+.card-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+.card-header h1{
+    font-weight: bolder;
+}
+
+.card-body{
+    height: calc(100% - 70px);
+    width: 100%;
+}
+.card-body form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.error{
+    background-color: rgba(255, 0, 0, 0.8);
+    color: #fff;
+    width: 80%;
+    text-align: center;
+    padding: 2px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+}
+
+/* Home */
+li{
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.header{
+    text-align: left;
+}
+
+.header h1{
+    margin-bottom: 0;
+}
+
+.sm-kategori{
+    display: none;
+}
+.sm{
+    display: none;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.ceritaku-wrapper{
+    width: 30%;
+    border-right: 2px solid black;
+}
+
+.kumpulan-wrapper{
+    width: 60%;
+}
+
+.ceritaku-wrapper, .kumpulan-wrapper{
+    padding: 0 2rem;
+}
+
+.ceritaku-wrapper .ceritaku-card-wrapper{
+    display: grid;
+    grid-template-columns: auto;
+    
+}
+
+.kumpulan-wrapper .kumpulan-card-wrapper{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.cerita-card{
+    border: 1px solid black;
+    padding: 8px;
+    min-height: 125px;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+}
+.cerita-card h3{
+    text-align: center;
+}
+.cerita-card-body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+.cerita-card-body p{
+    margin: 0;
+}
+
+@media screen and ((min-width: 576px) and (max-width: 1023px)) {
+    .header{
+        text-align: center;
+        margin-bottom: 0.3rem;
+    }
+    .container{
+        flex-direction: column-reverse;
+    }
+    .container .header{
+        text-align: left;
+    }
+    .kumpulan-wrapper{
+        width: 100%;
+    }
+    .ceritaku-wrapper{
+        width: 100%;
+        border-right: 0px;
+    }
+    .ceritaku-wrapper .ceritaku-card-wrapper{
+        display: grid;
+        grid-template-columns: 50% auto;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .header{
+        text-align: center;
+        margin-bottom: 0.3rem;
+    }
+    .container .header{
+        text-align: left;
+    }
+    .sm-kategori{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .sm-kategori label{
+        display: block;
+    }
+    .container{
+        flex-direction: column;
+    }
+    .ceritaku-wrapper, .kumpulan-wrapper{
+        padding: 0 0;
+    }
+    .ceritaku-wrapper{
+        width: 100%;
+        border-right: 0px;
+    }
+    .kumpulan-wrapper{
+        width: 100%;
+    }
+    .ceritaku-wrapper .ceritaku-card-wrapper{
+        display: grid;
+        grid-template-columns: auto;
+        
+    }
+    .kumpulan-wrapper .kumpulan-card-wrapper{
+        display: grid;
+        grid-template-columns: auto;
+    }
+    
+}
+
+/* New */
+.content-new{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 400px;
+    gap: 12px;
+}
+
+.content-new textarea{
+    min-height: 60px;
+}
+
+/* Read  */
+.paragraf{
+    padding-left: 20px;
+}
+textarea{
+    min-height: 50px;
+}

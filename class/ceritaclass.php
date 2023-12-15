@@ -4,6 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+require_once('class/connection.php'); 
+
 class Cerita{
 
     private $idCerita;
@@ -47,13 +49,9 @@ class Cerita{
         return $this->pembuat;
     }
 
-    protected static function ConnectionDb(){
-        return new mysqli('localhost', 'id21385019_kenrick_wensel', 'Kenrick_Wensel_123', 'id21385019_fspcerbung');
-        // return new mysqli('localhost', 'root', '', 'fsp-cerita');
-    }
 
     public function TotalData($keyword){
-        $con = $this::ConnectionDb();
+        $con = ConnectionDb::Connect();
 
         $stmt = $con->prepare("SELECT * from cerita where judul like ?");
         $stmt->bind_param('s', $keyword);
@@ -65,7 +63,7 @@ class Cerita{
     }
     
     public function DaftarCerita($keyword, $currentPage, $perpage){
-        $con = $this::ConnectionDb();
+        $con = ConnectionDb::Connect();
         
         $startLimit = ($currentPage - 1) * $perpage;
 
@@ -85,7 +83,7 @@ class Cerita{
         return $ceritaArr;
     }
     public function TampilkanJudul($idCerita) {
-        $con = $this::ConnectionDb();
+        $con = ConnectionDb::Connect();
         $sql = "SELECT judul from cerita where idcerita = ?";
         $stmt = $con->prepare($sql);
         $stmt->bind_param('i', $idCerita);
@@ -98,7 +96,7 @@ class Cerita{
     }
 
     public function LihatCerita($idCerita){
-        $con = $this::ConnectionDb();
+        $con = ConnectionDb::Connect();
     
         $sql2 = "SELECT isi_paragraf from paragraf where idcerita = ?";
         $stmt2 = $con->prepare($sql2);
@@ -116,7 +114,7 @@ class Cerita{
 
     public function TambahCerita($idUser, $judul, $paragraf){
         
-        $con = $this::ConnectionDb();
+        $con = ConnectionDb::Connect();
 
         $sql = "INSERT into cerita values(null, ?,?)";
         $stmt = $con->prepare($sql);
@@ -143,7 +141,7 @@ class Cerita{
     }
 
     public function TambahParagraf($idUser, $idCerita, $paragraf){
-        $con = $this::ConnectionDb();
+        $con = ConnectionDb::Connect();
 
         $sql = "INSERT into paragraf values(null,?,?,?, now())";
         $stmt = $con->prepare($sql);

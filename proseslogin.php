@@ -1,5 +1,5 @@
 <?php
- require_once('userclass.php');
+ require_once('class/userclass.php');
     if(isset($_POST['submit'])){
         $nrp = strip_tags(addslashes($_POST['nrp'])); 
         $password =  strip_tags(addslashes($_POST['password']));

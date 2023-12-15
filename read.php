@@ -2,8 +2,8 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    require_once('userclass.php'); 
-    require_once('ceritaclass.php'); 
+    require_once('class/userclass.php'); 
+    require_once('class/ceritaclass.php'); 
     
     if(!isset($_SESSION['id'])){
         header('location: index.php');
@@ -25,14 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $judul ?></title>
-    <style>
-    .paragraf{
-        padding-left: 20px;
-    }
-    textarea{
-        min-height: 50px;
-    }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1><?= $judul?></h1>

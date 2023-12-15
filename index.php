@@ -6,7 +6,7 @@
     if(isset($_SESSION['id'])){
         header('location: home.php');
     }
-    require_once('userclass.php');
+    require_once('class/userclass.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,55 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Cerbung</title>
-    <style type="text/css">
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
-        *{
-            font-family: 'Inter', sans-serif;
-        }
-        .content{
-            width: 100%;
-            height: calc(100vh - 70px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .card{
-            width: 300px;
-            height: 350px;
-            background-color: yellow;
-        }
-        .card-header{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 70px;
-        }
-        .card-header h1{
-            font-weight: bolder;
-        }
-
-        .card-body{
-            height: calc(100% - 70px);
-            width: 100%;
-        }
-        .card-body form{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .error{
-            background-color: rgba(255, 0, 0, 0.8);
-            color: #fff;
-            width: 80%;
-            text-align: center;
-            padding: 2px;
-            margin-bottom: 8px;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <section class="content">
