@@ -3,7 +3,7 @@ require_once('class/ceritaclass.php');
 require_once('class/connection.php'); 
 
     $con = ConnectionDb::Connect();
-    $perpage=2;
+    $perpage=4;
     $currentPage= $_POST['currentPage'];
 
     $startLimit = ($currentPage - 1) * $perpage;
