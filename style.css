@@ -99,9 +99,12 @@ li{
 
 .kumpulan-wrapper .kumpulan-card-wrapper{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% auto;
 }
 
+.pageButton{
+    margin-left: 0.5rem;
+}
 .cerita-card{
     border: 1px solid black;
     padding: 8px;
@@ -133,6 +136,9 @@ li{
     }
     .container .header{
         text-align: left;
+    }
+    .ceritaku-wrapper, .kumpulan-wrapper{
+        padding: 0 0rem;
     }
     .kumpulan-wrapper{
         width: 100%;

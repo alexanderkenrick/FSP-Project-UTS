@@ -27,7 +27,7 @@ if(!isset($_SESSION['id'])){
 </style>
 <body>
     
-    <form action="tambah.php" method="post">
+    <form action="new.php" method="post">
 
         <div class="content-new">
             <label for="judul">Judul:</label>

@@ -24,7 +24,6 @@ if(!isset($_SESSION['id'])){
     <title>Cerita Bersambung</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 </head>
 <body>
     <!-- <form action="home.php" method="GET" style="margin-bottom: 20px;">
@@ -44,9 +43,9 @@ if(!isset($_SESSION['id'])){
             <option value="0" selected>Kumpulan Cerita</option>
             <option value="1">Ceritaku</option>
         </select>
-        <input type="hidden" name="idPembuat" id="idPembuat" value="<?= $_SESSION['id']?>">
-        <input type="hidden" name="page" id="currentPage" value="1">
     </div>
+    <input type="hidden" name="idPembuat" id="idPembuat" value="<?= $_SESSION['id']?>">
+        <input type="hidden" name="page" id="currentPage" value="1">
     <button onclick="window.location.href='new.php'">Buat Cerita Baru</button> <br> <br>
 
     <div class="container">
@@ -59,7 +58,7 @@ if(!isset($_SESSION['id'])){
 
 
             </div>
-            <button currentPage="1" id="ceritakuButton">Tampilkan Cerita Selanjutnya</button>
+            <button currentPage="1" id="ceritakuButton" class="pageButton">Tampilkan Cerita Selanjutnya</button>
         </div>
         <div class="kumpulan-wrapper">
             <div class="header">
@@ -69,7 +68,7 @@ if(!isset($_SESSION['id'])){
         
                
             </div>
-            <button currentPage="1" id="kumpulanButton">Tampilkan Cerita Selanjutnya</button>
+            <button currentPage="1" id="kumpulanButton" class="pageButton">Tampilkan Cerita Selanjutnya</button>
         </div>
     </div>
 

@@ -17,13 +17,13 @@ if(isset($_POST['simpan'])){
 
     if($paragraf== '' || $paragraf==' ' || $paragraf == '' || $paragraf== " "){
         $_SESSION['flash_message'] = "Judul dan paragraf tidak boleh kosong";
-        header("location: lihat.php?cerita=".$idCerita);
+        header("location: read.php?cerita=".$idCerita);
     }else{
         $cerita = new Cerita();
         $msg = $cerita->TambahParagraf($idUser, $idCerita, $paragraf);
 
         $_SESSION['flash_message'] = $msg;
-        header("location: lihat.php?cerita=".$idCerita);
+        header("location: read.php?cerita=".$idCerita);
     }
 }
 ?>
